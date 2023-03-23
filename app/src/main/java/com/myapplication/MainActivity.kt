@@ -3,6 +3,7 @@ package com.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.mvvmdaggercheezycode.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainVewModel: MainViewModel
+    private val mainVewModel: MainViewModel by viewModels()
 
 
     private val products: TextView
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainVewModel = ViewModelProvider(this)[MainViewModel::class.java]
+       // mainVewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         mainVewModel.productsLiveData.observe(this) {
             products.text = it.joinToString { x -> x.title + "\n\n" }
